@@ -54,6 +54,10 @@ app.get('/places', (request, response) => {
     .catch(e => {console.log(e); response.status(500).send('There was an error in finding the places.')});  
     
   });
-
+  app.post('/deletePlace', (request, response) => {
+    db.deletePlace(request.body.id)
+    .then(places => response.json(places))
+    .catch(e => {console.log(e); response.status(500).send('there was an error in delete the place')})
+ });
 
 app.listen(port, () => console.log("Listening on port " + port))

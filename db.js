@@ -81,6 +81,11 @@ let findPlaces = (name, street, city, state, postalcode) => {
     .then(result => result.rows);
 
 }
+let deletePlace = (id) => {
+    console.log(connectionString)
+    let sql = `DELETE FROM mynearbyplaces.place WHERE id=$1`;
+    return pool.query(sql)
+    .then(result => {console.log('the place was deleted'); });  
+}
 
-
-module.exports = { saveAddress, savePlace, getPlaces, findPlaces, saveReview, getPlaceId, getCustomerId}
+module.exports = { saveAddress, savePlace, getPlaces, findPlaces, saveReview, getPlaceId, getCustomerId, deletePlace}
