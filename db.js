@@ -55,7 +55,7 @@ let getPlaceId = (placeName) =>{
 }
 let getPlaces = () => {
     let sql = `select p.placename, p.id, a.street , a.city , a.state , a.zip,
-    json_agg(json_build_object('comment', r.comment, 'rating', r.rating, 'customer', c."name", "reviewid", r.id)) as reviews
+    json_agg(json_build_object('comment', r.comment, 'rating', r.rating, 'customer', c."name", 'reviewid', r.id)) as reviews
     from mynearbyplaces.place p 
     inner join mynearbyplaces.address a on p.addressid  = a.id 
     inner join mynearbyplaces.review r on p.id = r.placeid 
