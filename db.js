@@ -60,7 +60,8 @@ let getPlaces = () => {
     inner join mynearbyplaces.address a on p.addressid  = a.id 
     inner join mynearbyplaces.review r on p.id = r.placeid 
     left join mynearbyplaces.customer c on r.customerid = c.id 
-    group by p.name, a.street , a.city , a.state , a.zip`;
+    group by p.placename, a.street , a.city , a.state , a.zip`;
+    console.log(sql);
     return pool.query(sql)
     .then(result => result.rows);
     
