@@ -76,12 +76,12 @@ let findPlaces = (name, street, city, state, postalcode) => {
     left join mynearbyplaces.review r on p.id = r.placeid 
     left join mynearbyplaces.customer c on r.customerid = c.id 
     where 
-    (lower(p.name) like lower('${!name ? '%%' : `%${name}%`}')) 
+    (lower(p.placename) like lower('${!name ? '%%' : `%${name}%`}')) 
     and (lower(a.street) like lower('${!street ? '%%' : `%${street}%`}')) 
     and (lower(a.city) like lower('${!city ? '%%' : `%${city}%`}')) 
     and (lower(a.state) like lower('${!state ? '%%' : `%${state}%`}')) 
-    and (cast(a.postalcode as text) like '${!postalcode ? '%%' : `%${postalcode}%`}') 
-    group by p.name, a.street , a.city , a.state , a.zip
+    and (cast(a.zip as text) like '${!postalcode ? '%%' : `%${postalcode}%`}') 
+    group by p.placename, a.street , a.city , a.state , a.zip
     `;
     console.log(sql);
     return pool.query(sql)
