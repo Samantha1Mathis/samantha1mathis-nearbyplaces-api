@@ -1,7 +1,14 @@
 const express = require('express');
+const cors = require('cors');
+
 
 const app = express();
 const port = process.env.PORT || 4002;
+const db = require('./db');
+
+app.use(express.json());
+app.use(cors());
+
 
 app.get('/', (request, response) =>{
     response.send(`Welcome to Imagequiz-Serverside`);
