@@ -69,7 +69,7 @@ let getPlaces = () => {
 
 let findPlaces = (name, street, city, state, postalcode) => {
 
-    let sql = `select p.placename, a.street , a.city , a.state , a.zip, 
+    let sql = `select p.placename, p.id, a.street , a.city , a.state , a.zip, 
     json_agg(json_build_object('comment', r.comment, 'rating', r.rating, 'customer', c."name")) as reviews
     from mynearbyplaces.place p 
     inner join mynearbyplaces.address a on p.addressid  = a.id 
@@ -81,7 +81,7 @@ let findPlaces = (name, street, city, state, postalcode) => {
     and (lower(a.city) like lower('${!city ? '%%' : `%${city}%`}')) 
     and (lower(a.state) like lower('${!state ? '%%' : `%${state}%`}')) 
     and (cast(a.zip as text) like '${!postalcode ? '%%' : `%${postalcode}%`}') 
-    group by p.placename, a.street , a.city , a.state , a.zip
+    group by p.placename, p.id, a.street , a.city , a.state , a.zip
     `;
     console.log(sql);
     return pool.query(sql)
